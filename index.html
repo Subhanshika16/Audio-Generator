@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AudioBook Generator</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-book-reader"></i> AudioBook Generator</h1>
+            <p>Transform your text into captivating audio experiences</p>
+        </header>
+
+        <main>
+            <div class="upload-section">
+                <div class="upload-box">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <h2>Upload Your File</h2>
+                    <p>Supported formats: .txt, .pdf, .doc, .docx</p>
+                    <input type="file" id="file-upload" accept=".txt,.pdf,.doc,.docx">
+                    <label for="file-upload" class="upload-btn">Choose File</label>
+                    <p id="file-name" class="file-name"></p>
+                </div>
+            </div>
+
+            <div class="features-section">
+                <h2>Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-language"></i>
+                        <h3>Multiple Languages</h3>
+                        <p>Support for various languages and accents</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-sliders-h"></i>
+                        <h3>Voice Customization</h3>
+                        <p>Adjust pitch, speed, and tone</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-magic"></i>
+                        <h3>Smart Formatting</h3>
+                        <p>Automatic punctuation and formatting</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-download"></i>
+                        <h3>Easy Export</h3>
+                        <p>Download in MP3 format</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 AudioBook Generator. All rights reserved.</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
