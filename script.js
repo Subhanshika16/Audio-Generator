@@ -38,4 +38,74 @@ document.addEventListener('DOMContentLoaded', function() {
         this.style.borderColor = '#dee2e6';
         this.style.backgroundColor = 'white';
     });
+
+    // Add new audio conversion functionality
+    const convertBtn = document.getElementById('convert-btn');
+    const audioPlayer = document.getElementById('audio-player');
+    const audioOutput = document.getElementById('audio-output');
+    const downloadBtn = document.getElementById('download-btn');
+    const speedRange = document.getElementById('speed-range');
+    const pitchRange = document.getElementById('pitch-range');
+    const speedValue = document.getElementById('speed-value');
+    const pitchValue = document.getElementById('pitch-value');
+    const voiceSelect = document.getElementById('voice-select');
+
+    // Update range value displays
+    speedRange.addEventListener('input', function() {
+        speedValue.textContent = `${this.value}x`;
+    });
+
+    pitchRange.addEventListener('input', function() {
+        pitchValue.textContent = `${this.value}x`;
+    });
+
+    convertBtn.addEventListener('click', async function() {
+        if (!fileUpload.files.length) {
+            alert('Please select a file first!');
+            return;
+        }
+
+        try {
+            convertBtn.disabled = true;
+            convertBtn.textContent = 'Converting...';
+
+            const formData = new FormData();
+            formData.append('file', fileUpload.files[0]);
+            formData.append('voice', voiceSelect.value);
+            formData.append('speed', speedRange.value);
+            formData.append('pitch', pitchRange.value);
+
+            // Replace with your actual backend API endpoint
+            const response = await fetch('/api/convert-to-audio', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (!response.ok) {
+                throw new Error('Conversion failed');
+            }
+
+            const audioBlob = await response.blob();
+            const audioUrl = URL.createObjectURL(audioBlob);
+            
+            audioOutput.src = audioUrl;
+            audioPlayer.style.display = 'block';
+            
+            // Enable download functionality
+            downloadBtn.addEventListener('click', () => {
+                const a = document.createElement('a');
+                a.href = audioUrl;
+                a.download = 'audiobook.mp3';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            });
+
+        } catch (error) {
+            alert('Error converting file: ' + error.message);
+        } finally {
+            convertBtn.disabled = false;
+            convertBtn.textContent = 'Convert to Audio';
+        }
+    });
 }); 
